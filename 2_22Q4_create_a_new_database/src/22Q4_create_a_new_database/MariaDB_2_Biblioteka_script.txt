@@ -1,0 +1,28 @@
+Utworzyć bazę biblioteka [utf8_polish_ci]:
+Tabele:
+- ksiazka (id, autor, tytul, rok_wydania, wydawnictwo, numer ISBN, czy_wypozyczona)
+=> INSERT INTO ksiazka (autor, tytul, rok_wydania, wydawnictwo, numer_ISBN, czy_wypozyczona) VALUES ('Anonim', 'Jak być i jak nie być', 2022, 'Anonimoo', '986-32-456-4354-2', 0)
+=> INSERT INTO ksiazka (autor, tytul, rok_wydania, wydawnictwo, numer_ISBN, czy_wypozyczona) VALUES ('Anonim1234', 'Przyszłość i przeszłość', 1752, 'Anonimoo', '986-32-456-4354-2', 1)
+=> INSERT INTO ksiazka (autor, tytul, rok_wydania, wydawnictwo, numer_ISBN, czy_wypozyczona) VALUES ('AL', 'Jak to było', 1752, 'ABCDEFG', '986-32-456-4354-2', 0)
+- klient (id, imie, nazwisko, liczba_pozyczonych_ksiazek, termin_oddania_ksiazek)
+=> INSERT INTO klient (imie, nazwisko, liczba_pozyczonych_ksiazek, termin_oddania_ksiazek) VALUES ('Nowa', 'Nowakowska', 2, '2022-11-14')
+=> INSERT INTO klient (imie, nazwisko) VALUES ('Na', 'Nudne')
+=> INSERT INTO klient (nazwisko) VALUES ('Nieznany')
+- wypożyczenie (id, id_klienta, id_ksiazki, id_pracownik_biblioteki, czy_oddana)
+=> INSERT INTO wypozyczenie (id_klienta, id_ksiazki, id_pracownik_biblioteki, czy_oddana) VALUES (1, 2, 1, 0)
+- bibliotekarz (id, nazwisko, data_zatrudnienia, liczba_ksiazek_wypozyczonych)
+=> INSERT INTO bibliotekarz (nazwisko, data_zatrudnienia, liczba_ksiazek_wypozyczonych) VALUES ('Czaso', '2020-01-23', 15)
+=> INSERT INTO bibliotekarz (nazwisko, data_zatrudnienia, liczba_ksiazek_wypozyczonych) VALUES ('Kas', '2022-05-14', 3)
+
+[+] przeanalizować tabelę i ew. poprawić i uzupełnić
+[+] wypełnić danymi
+[+] wykonać kilka ciekawych zapytać (z join)
+
+(1) wyświetlić tytuły ksiązek, wydawnictwo i numer ISBN dla książek, które nie są wypożyczone
+=> SELECT tytul, wydawnictwo, numer_ISBN FROM ksiazka WHERE czy_wypozyczona = 0
+(2) wyswietlic klientow biblioteki, ktorzy nie wypożyczyli żadnej ksiązki
+=> SELECT * FROM klient WHERE liczba_pozyczonych_ksiazek = 0
+(3) wyswietl wszystkich bibliotekarzy, którzy wypożyczyli więcej niż 5 ksiązek
+=> SELECT * FROM bibliotekarz WHERE liczba_ksiazek_wypozyczonych > 5
+(4) wyświetlić osoba, ktora ma wypożyczoną 1 lub więcej ksiązek
+=> SELECT klient.id, klient.imie, klient.nazwisko from klient JOIN wypozyczenie ON klient.id = wypozyczenie.id_klienta
