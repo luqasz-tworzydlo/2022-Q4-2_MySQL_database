@@ -307,6 +307,10 @@ SELECT * FROM `pracownik`
 
 17.1 Wyszukaj samochody, który nie zostały zwrócone. (Data oddania samochodu ma mieć wartość NULL.) Wyświetl identyfikator, markę i typ samochodu oraz jego datę wypożyczenia i oddania.
 # SELECT samochod.id_samochod, samochod.marka, samochod.typ, wypozyczenie.data_wyp, wypozyczenie.data_odd FROM samochod JOIN wypozyczenie ON samochod.id_samochod = wypozyczenie.id_samochod WHERE wypozyczenie.data_odd IS NULL
+# SELECT samochod.id_samochod, samochod.marka, samochod.typ FROM samochod JOIN wypozyczenie ON wypozyczenie.id_samochod = samochod.id_samochod WHERE wypozyczenie.data_odd is NULL
+# SELECT samochod.id_samochod, samochod.marka, samochod.typ, wypozyczenie.data_odd FROM samochod JOIN wypozyczenie ON wypozyczenie.id_samochod = samochod.id_samochod WHERE wypozyczenie.data_odd is NULL
+# SELECT samochod.id_samochod, samochod.marka, samochod.typ, wypozyczenie.data_odd, wypozyczenie.data_wyp FROM samochod JOIN wypozyczenie ON wypozyczenie.id_samochod = samochod.id_samochod WHERE wypozyczenie.data_odd is NULL
+# SELECT samochod.id_samochod, samochod.marka, samochod.typ, wypozyczenie.data_wyp, wypozyczenie.data_odd FROM samochod JOIN wypozyczenie ON wypozyczenie.id_samochod = samochod.id_samochod WHERE wypozyczenie.data_odd is NULL
 
 # --------------------------------------------------
 [!] `klient` & `wypozyczenie` [!]
@@ -314,14 +318,94 @@ SELECT * FROM `pracownik`
 
 17.2 Wyszukaj klientów, którzy nie zwrócili jeszcze samochodu. (Data oddania samochodu ma mieć wartość NULL.) Wyświetl imię i nazwisko klienta oraz identyfikator samochodu i datę wypożyczenia nie zwróconego jeszcze samochodu. Wynik posortuj rosnąco względem nazwiska i imienia klienta.
 # SELECT klient.imie, klient.nazwisko, wypozyczenie.id_samochod, wypozyczenie.data_wyp FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient WHERE wypozyczenie.data_odd IS NULL ORDER BY nazwisko ASC, imie ASC
+# SELECT klient.imie, klient.nazwisko, wypozyczenie.id_samochod, wypozyczenie.data_wyp, wypozyczenie.data_odd FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient WHERE wypozyczenie.data_odd IS NULL ORDER BY klient.nazwisko ASC, klient.imie ASC
 
 17.3 Wśród klientów wypożyczalni wyszukaj daty i kwoty wpłaconych przez nich kaucji. Wyświetl imię i nazwisko klienta oraz datę wpłacenia kaucji (data wypożyczenia samochodu jest równocześnie datą wpłacenia kaucji) i jej wysokość (pomiń kaucje mające wartość NULL).
 # SELECT klient.imie, klient.nazwisko, wypozyczenie.data_wyp, wypozyczenie.kaucja FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient WHERE wypozyczenie.kaucja IS NOT NULL
+# SELECT klient.imie, klient.nazwisko, wypozyczenie.data_wyp, wypozyczenie.kaucja FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient WHERE wypozyczenie.kaucja IS NOT NULL
 
+# --------------------------------------------------
+[!] `klient` & `wypozyczenie` & 'samochod' [!]
 # --------------------------------------------------
 
 18 Złączenia wewnętrzne większej liczby tabel
+# SELECT klient.imie, klient.nazwisko, wypozyczenie.data_wyp, samochod.marka, samochod.typ FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient JOIN samochod on samochod.id_samochod = wypozyczenie.id_samochod
 
 18.1 Dla każdego klienta, który choć raz wypożyczył samochód, wyszukaj jakie i kiedy wypożyczył samochody. Wyświetl imię i nazwisko klienta oraz datę wypożyczenia, markę i typ wypożyczonego samochodu. Wynik posortuj rosnąco po nazwisku i imieniu klienta oraz marce i typie samochodu.
+# SELECT klient.imie, klient.nazwisko, wypozyczenie.data_wyp, samochod.marka, samochod.typ FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient JOIN samochod on samochod.id_samochod = wypozyczenie.id_samochod ORDER BY klient.nazwisko ASC, klient.imie ASC, samochod.marka ASC, samochod.typ ASC
+
+# --------------------------------------------------
+[!] `miejsce` & `wypozyczenie` & 'wypozyczenie' [!]
+# ----------------------------------------------
+
+18.2 Dla każdej filii wypożyczalni samochodów (tabela miejsce) wyszukaj jakie samochody były wypożyczane. Wyświetl adres filii (ulica i numer) oraz markę i typ wypożyczonego samochodu. Wyniki posortuj rosnąco względem adresu filii, marki i typu samochodu.
+# SELECT miejsce.ulica, miejsce.numer, samochod.marka, samochod.typ FROM miejsce JOIN wypozyczenie ON miejsce.id_miejsce = wypozyczenie.id_miejsca_wyp JOIN samochod on samochod.id_samochod = wypozyczenie.id_samochod
+
+# --------------------------------------------------
+[!] `wypozyczenie` & `wypozyczenie` & 'klient' [!]
+# ----------------------------------------------
+
+18.3 Dla każdego wypożyczonego samochodu wyszukaj informację jacy klienci go wypożyczali. Wyświetl identyfikator, markę i typ samochodu oraz imię i nazwisko klienta. Wyniki posortuj rosnąco po identyfikatorze samochodu oraz nazwisku i imieniu klienta.
+# SELECT samochod.id_samochod, samochod.marka, samochod.typ, klient.imie, klient.nazwisko FROM samochod JOIN wypozyczenie on samochod.id_samochod = wypozyczenie.id_wypozyczenie JOIN klient ON klient.id_klient = wypozyczenie.id_klient ORDER BY samochod.id_samochod ASC, klient.nazwisko ASC
+
+# --------------------------------------------------
+SELECT * FROM `pracownik`
+# --------------------------------------------------
+
+19 Funkcje agregujące bez grupowania
+# podstawowe, przydatne funkcji: avg, min, max
+SELECT MAX(pracownik.pensja) FROM pracownik
+
+19.1 Znaleźć największą pensję pracownika wypożyczalni samochodów.
+# SELECT MAX(pracownik.pensja) FROM pracownik
+
+19.2 Znaleźć średnią pensję pracownika wypożyczalni samochodów.
+# SELECT AVG(pracownik.pensja) FROM pracownik
+
+# --------------------------------------------------
+SELECT * FROM `samochod`
+# --------------------------------------------------
+
+19.3 Znaleźć najwcześniejszą datę wyprodukowania samochodu.
+SELECT MIN(samochod.data_prod) FROM samochod
+
+# --------------------------------------------------
+[!] 'klient' & `wypozyczenie` [!]
+# --------------------------------------------------
+
+20 Funkcje agregujące z grupowaniem (GROUP BY, złączenia zewnętrzne)
+# SELECT klient.imie, klient.nazwisko, wypozyczenie.id_wypozyczenie FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient
+# SELECT klient.imie, klient.nazwisko, COUNT(wypozyczenie.id_wypozyczenie) FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient GROUP BY klient.id_klient
+
+20.1 Dla każdego klienta wypisz imię, nazwisko i łączną ilość wypożyczeń samochodów (nie zapomnij o zerowej liczbie wypożyczeń). Wynik posortuj malejąco względem ilości wypożyczeń.
+# SELECT klient.imie, klient.nazwisko, COUNT(wypozyczenie.id_wypozyczenie) FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient GROUP BY klient.id_klient
+
+# --------------------------------------------------
+[!] 'samochod' & `wypozyczenie` [!]
+# --------------------------------------------------
+
+20.2 Dla każdego samochodu (identyfikator, marka, typ) oblicz ilość wypożyczeń. Wynik posortuj rosnąco względem ilości wypożyczeń. (Nie zapomnij o samochodach, które ani razu nie zostały wypożyczone.)
+# SELECT samochod.id_samochod, samochod.marka, samochod.typ, count(wypozyczenie.id_wypozyczenie) FROM samochod JOIN wypozyczenie ON samochod.id_samochod = wypozyczenie.id_samochod GROUP BY samochod.id_samochod
+# SELECT samochod.id_samochod, samochod.marka, samochod.typ, count(wypozyczenie.id_wypozyczenie) as liczba FROM samochod JOIN wypozyczenie ON samochod.id_samochod = wypozyczenie.id_samochod GROUP BY samochod.id_samochod ORDER BY liczba
+# SELECT samochod.id_samochod, samochod.marka, samochod.typ, count(wypozyczenie.id_wypozyczenie) as liczba FROM samochod LEFT JOIN wypozyczenie ON samochod.id_samochod = wypozyczenie.id_samochod GROUP BY samochod.id_samochod ORDER BY liczba
+
+# --------------------------------------------------
+[!] 'pracownik' & `wypozyczenie` [!]
+# --------------------------------------------------
+
+20.3 Dla każdego pracownika oblicz ile wypożyczył samochodów klientom. Wyświetl imię i nazwisko pracownika oraz ilość wypożyczeń. Wynik posortuj malejąco po ilości wypożyczeń. (Nie zapomnij o pracownikach, którzy nie wypożyczyli żadnego samochodu.)
+# SELECT pracownik.imie, pracownik.nazwisko, COUNT(wypozyczenie.id_wypozyczenie) FROM pracownik JOIN wypozyczenie ON pracownik.id_pracownik = wypozyczenie.id_pracow_wyp GROUP BY pracownik.id_pracownik
+# SELECT pracownik.imie, pracownik.nazwisko, COUNT(wypozyczenie.id_wypozyczenie) AS ilosc FROM pracownik JOIN wypozyczenie ON pracownik.id_pracownik = wypozyczenie.id_pracow_wyp GROUP BY pracownik.id_pracownik ORDER BY ilosc DESC
+# SELECT pracownik.imie, pracownik.nazwisko, COUNT(wypozyczenie.id_wypozyczenie) AS ilosc FROM pracownik LEFT JOIN wypozyczenie ON pracownik.id_pracownik = wypozyczenie.id_pracow_wyp GROUP BY pracownik.id_pracownik ORDER BY ilosc DESC
+
+# --------------------------------------------------
+
+21 Warunki na funkcje agregujące (HAVING)
+
+21.1 Znajdź klientów, którzy co najmniej 2 razy wypożyczyli samochód. Wypisz dla tych klientów imię, nazwisko i ilość wypożyczeń. Wynik posortuj rosnąco względem nazwiska i imienia.
+
+21.2 Znajdź samochody, które były wypożyczone co najmniej 5 razy. Wyświetl identyfikator samochodu, markę, typ i ilość wypożyczeń. Wynik posortuj rosnąco względem marki i typu samochodu.
+
+21.3 Znajdź pracowników, którzy klientom wypożyczyli co najwyżej 20 razy samochód. Wyświetl imiona i nazwiska pracowników razem z ilością wypożyczeń. Wynik posortuj rosnąco względem ilości wypożyczeń, nazwiska i imienia pracownika. (Uwzględnij pracowników, którzy nie wypożyczyli żadnego samochodu.)
 
 # --------------------------------------------------
