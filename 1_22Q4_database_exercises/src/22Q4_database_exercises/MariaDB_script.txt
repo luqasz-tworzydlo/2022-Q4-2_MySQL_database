@@ -61,7 +61,7 @@ SELECT * FROM `pracownik`
 # SELECT imie, nazwisko FROM pracownik WHERE dzial='obsługa klienta' AND stanowisko='sprzedawca'
 
 # 5.1 Z tabeli pracownik wyświetlić imiona, nazwiska, działy, stanowiska tych pracowników, którzy pracują w dziale obsługi klienta na stanowisku sprzedawca.
-# SELECT imie, nazwisko, dzial, stanowisko FROM pracownik WHERE dzial='obsługa klienta' AND stanowisko='sprzedawca'\
+# SELECT imie, nazwisko, dzial, stanowisko FROM pracownik WHERE dzial='obsługa klienta' AND stanowisko='sprzedawca'
 
 # 5.2 Znaleźć pracowników pracujących w dziale technicznym na stanowisku kierownika lub sprzedawcy. Wyświetl imię, nazwisko, dział, stanowisko.
 # SELECT imie, nazwisko, dzial, stanowisko FROM pracownik WHERE dzial='techniczny' AND stanowisko='kierownik' OR dzial='techniczny' AND stanowisko='sprzedawca'
@@ -139,17 +139,17 @@ SELECT * FROM `samochod`
 SELECT * FROM `pracownik`
 # --------------------------------------------------
 
-9 Wartość NULL
+# 9 Wartość NULL
 # SELECT * FROM pracownik WHERE dodatek IS NULL
 
-9.1 Znaleźć pracowników, którzy nie mają określonego dodatku do pensji.
+# 9.1 Znaleźć pracowników, którzy nie mają określonego dodatku do pensji.
 # SELECT * FROM pracownik WHERE dodatek IS NULL
 
 # --------------------------------------------------
 SELECT * FROM `klient`
 # --------------------------------------------------
 
-9.2 Wyświetlić klientów, którzy posiadają kartę kredytową.
+# 9.2 Wyświetlić klientów, którzy posiadają kartę kredytową.
 # SELECT * FROM klient WHERE nr_karty_kredyt IS NOT NULL
 
 # --------------------------------------------------
@@ -181,23 +181,23 @@ SELECT * FROM `pracownik`
 # 11.1 Znajdź imię i nazwisko pracownika, który jako pierwszy został zatrudniony w wypożyczalni samochodów. (Jest tylko jeden taki pracownik.)
 # SELECT imie, nazwisko FROM pracownik ORDER BY data_zatr ASC LIMIT 1
 
-11.2 Wyświetl pierwszych czterech pracowników z alfabetycznej listy (nazwiska i imiona) wszystkich pracowników. (W tym zadaniu nie musisz się przejmować powtórkami imion i nazwisk, ale gdybyś chciał to sprawdź konstrukcję SELECT TOP x WITH TIES …)
+# 11.2 Wyświetl pierwszych czterech pracowników z alfabetycznej listy (nazwiska i imiona) wszystkich pracowników. (W tym zadaniu nie musisz się przejmować powtórkami imion i nazwisk, ale gdybyś chciał to sprawdź konstrukcję SELECT TOP x WITH TIES …)
 # SELECT imie, nazwisko FROM pracownik ORDER BY nazwisko ASC, imie ASC LIMIT 4
 
 # --------------------------------------------------
 ######################################################################
 # --------------------------------------------------
 
-12 Wybrane funkcje daty i czasu (DAY, MONTH, YEAR, GETDATE, DATEDIFF)
+# 12 Wybrane funkcje daty i czasu (DAY, MONTH, YEAR, GETDATE, DATEDIFF)
 # SELECT imie, nazwisko, stanowisko, data_zatr FROM pracownik WHERE MONTH(data_zatr) = 5 ORDER BY nazwisko, imie ASC
 # SELECT * FROM pracownik;
 
-12.1 Wyszukaj pracowników zatrudnionych w maju. Wyświetl ich imiona, nazwiska i datę zatrudnienia. Wynik posortuj rosnąco względem nazwiska i imienia. Wskazówka: Zajrzyj do dokumentacji MS SQL i poczytaj o funkcjach: DAY, MONTH, YEAR, GETDATE, DATEDIFF.
+# 12.1 Wyszukaj pracowników zatrudnionych w maju. Wyświetl ich imiona, nazwiska i datę zatrudnienia. Wynik posortuj rosnąco względem nazwiska i imienia. Wskazówka: Zajrzyj do dokumentacji MS SQL i poczytaj o funkcjach: DAY, MONTH, YEAR, GETDATE, DATEDIFF.
 # SELECT imie, nazwisko, data_zatr FROM pracownik WHERE MONTH(data_zatr) = 5 ORDER BY nazwisko, imie ASC
 # SELECT imie, nazwisko, data_zatr FROM pracownik WHERE MONTH(data_zatr) = 5;
 # SELECT imie, nazwisko, data_zatr FROM pracownik WHERE MONTH(data_zatr) = 5 ORDER BY nazwisko ASC, imie ASC;
 
-12.2 Dla każdego pracownika (imię i nazwisko) oblicz ile już pracuje dni. Wynik posortuj malejąco według ilości przepracowanych dni.
+# 12.2 Dla każdego pracownika (imię i nazwisko) oblicz ile już pracuje dni. Wynik posortuj malejąco według ilości przepracowanych dni.
 # SELECT imie, nazwisko, data_zatr, DATEDIFF (CURRENT_DATE, data_zatr) AS dni_pracy FROM pracownik ORDER BY dni_pracy DESC
 # SELECT imie, nazwisko, DATEDIFF (NOW(), data_zatr) AS dni FROM pracownik ORDER BY dni DESC
 
@@ -213,33 +213,33 @@ SELECT * FROM `samochod`
 SELECT * FROM `klient`
 # --------------------------------------------------
 
-13 Wybrane funkcje operujące na napisach (LEFT, RIGHT, LEN, UPPER, LOWER, STUFF) !!!!!!!!!!!!!!!!
-SELECT imie, nazwisko, CONCAT(LEFT(imie, 1) , left(nazwisko, 1)) AS inicjal FROM klient
+# 13 Wybrane funkcje operujące na napisach (LEFT, RIGHT, LEN, UPPER, LOWER, STUFF) !!!!!!!!!!!!!!!!
+# SELECT imie, nazwisko, CONCAT(LEFT(imie, 1) , left(nazwisko, 1)) AS inicjal FROM klient
 
-13.1 Wyświetl imię, nazwisko i inicjały każdego klienta. Wynik posortuj względem inicjałów, nazwiska i imienia klienta. Wskazówka: Zajrzyj do dokumentacji MS SQL i poczytaj o funkcjach: LEFT, RIGHT, LEN, UPPER, LOWER, STUFF.
+# 13.1 Wyświetl imię, nazwisko i inicjały każdego klienta. Wynik posortuj względem inicjałów, nazwiska i imienia klienta. Wskazówka: Zajrzyj do dokumentacji MS SQL i poczytaj o funkcjach: LEFT, RIGHT, LEN, UPPER, LOWER, STUFF.
 # SELECT imie, nazwisko, CONCAT(LEFT(imie, 1) , left(nazwisko, 1)) AS inicjal FROM klient ORDER BY inicjal, nazwisko, imie
 
-13.2 Wyświetl imiona i nazwiska klientów w taki sposób, aby pierwsza litera imienia i nazwiska była wielka, a pozostałe małe.
+# 13.2 Wyświetl imiona i nazwiska klientów w taki sposób, aby pierwsza litera imienia i nazwiska była wielka, a pozostałe małe.
 # SELECT CONCAT(UPPER(LEFT(imie, 1)), LOWER(SUBSTRING(imie, 2))) as imie, CONCAT(UPPER(LEFT(nazwisko, 1)), LOWER(SUBSTRING(nazwisko, 2))) as nazwisko from klient
 
-13.3 Wyświetl imiona, nazwiska i numery kart kredytowych klientów. Każda z ostatnich sześciu cyfr wyświetlanego numeru karty kredytowej klienta powinna być zastąpiona znakiem x .
+# 13.3 Wyświetl imiona, nazwiska i numery kart kredytowych klientów. Każda z ostatnich sześciu cyfr wyświetlanego numeru karty kredytowej klienta powinna być zastąpiona znakiem x .
 # SELECT imie, nazwisko, CONCAT(LEFT(nr_karty_kredyt, 5), 'xxxxxx') from klient
 
 # --------------------------------------------------
 SELECT * FROM `pracownik`
 # --------------------------------------------------
 
-14 Modyfikacja danych w bazie danych (UPDATE)
+# 14 Modyfikacja danych w bazie danych (UPDATE)
 # UPDATE pracownik SET dodatek = 50 WHERE dodatek IS null
 
-14.1 Pracownikom, którzy nie mają określonej wysokości dodatku nadaj dodatek w wysokości 50 zł.
+# 14.1 Pracownikom, którzy nie mają określonej wysokości dodatku nadaj dodatek w wysokości 50 zł.
 # UPDATE pracownik SET dodatek = 50 WHERE dodatek IS null
 
 # --------------------------------------------------
 SELECT * FROM `klient`
 # --------------------------------------------------
 
-14.2 Klientowi o identyfikatorze równym 10 zmień imię i nazwisko na Jerzy Nowak.
+# 14.2 Klientowi o identyfikatorze równym 10 zmień imię i nazwisko na Jerzy Nowak.
 # UPDATE klient SET imie = 'Jerzy' AND nazwisko = 'Nowak' WHERE id_klient = 10
 # UPDATE klient SET imie = 'Jerzy', nazwisko = 'Nowak' WHERE id_klient = 10
 
@@ -247,65 +247,64 @@ SELECT * FROM `klient`
 SELECT * FROM `pracownik`
 # --------------------------------------------------
 
-14.3 Zwiększ o 100 zł dodatek pracownikom, których pensja jest mniejsza niż 1500 zł.
+# 14.3 Zwiększ o 100 zł dodatek pracownikom, których pensja jest mniejsza niż 1500 zł.
 # UPDATE pracownik SET dodatek = dodatek+100 WHERE pensja < 1500
 
 # --------------------------------------------------
 SELECT * FROM `klient`
 # --------------------------------------------------
 
-15 Usuwanie danych z bazy danych (DELETE)
+# 15 Usuwanie danych z bazy danych (DELETE)
 # DELETE FROM klient WHERE id_klient = 17
 
-15.1 Usunąć klienta o identyfikatorze równym 17.
+# 15.1 Usunąć klienta o identyfikatorze równym 17.
 # DELETE FROM klient WHERE id_klient = 17
 
 # --------------------------------------------------
 SELECT * FROM `wypozyczenie`
 # --------------------------------------------------
 
-15.2 Usunąć wszystkie informacje o wypożyczeniach dla klienta o identyfikatorze równym 17.
+# 15.2 Usunąć wszystkie informacje o wypożyczeniach dla klienta o identyfikatorze równym 17.
 # DELETE FROM wypozyczenie WHERE id_klient = 17
 
 # --------------------------------------------------
 SELECT * FROM `samochod`
 # --------------------------------------------------
 
-15.3 Usuń wszystkie samochody o przebiegu większym niż 60000.
+# 15.3 Usuń wszystkie samochody o przebiegu większym niż 60000.
 # DELETE FROM samochod WHERE przebieg > 60000
 
 # --------------------------------------------------
 SELECT * FROM `klient`
 # --------------------------------------------------
 
-16 Dodawanie danych do bazy danych (INSERT)
-#
+# 16 Dodawanie danych do bazy danych (INSERT)
 
-16.1 Dodaj do bazy danych klienta o identyfikatorze równym 121: Adam Cichy zamieszkały ul. Korzenna 12, 00-950 Warszawa, tel. 123-454-321.
+# 16.1 Dodaj do bazy danych klienta o identyfikatorze równym 121: Adam Cichy zamieszkały ul. Korzenna 12, 00-950 Warszawa, tel. 123-454-321.
 # INSERT INTO klient (id_klient, imie, nazwisko, ulica, numer, kod, miasto, telefon) VALUES (121, 'Adam', 'Cichy', 'Korzenna', 12, '00-950', 'Warszawa', '123-454-321')
 
 # --------------------------------------------------
 SELECT * FROM `samochod`
 # --------------------------------------------------
 
-16.2 Dodaj do bazy danych nowy samochód o identyfikatorze równym 50: srebrna skoda octavia o pojemności silnika 1896 cm3 wyprodukowana 1 września 2012 r. i o przebiegu 5 000 km.
+# 16.2 Dodaj do bazy danych nowy samochód o identyfikatorze równym 50: srebrna skoda octavia o pojemności silnika 1896 cm3 wyprodukowana 1 września 2012 r. i o przebiegu 5 000 km.
 # INSERT INTO samochod (id_samochod, kolor, marka, typ, poj_silnika, data_prod, przebieg) VALUES (50, 'srebrna', 'skoda', 'octavia', 1896, '2012-09-01', 5000)
 
 # --------------------------------------------------
 SELECT * FROM `pracownik`
 # --------------------------------------------------
 
-16.3 Dodaj do bazy danych pracownika: Alojzy Mikos zatrudniony od 11 sierpnia 2010 r. w dziale zaopatrzenie na stanowisku magazyniera z pensją 3000 zł i dodatkiem 50 zł, telefon do pracownika: 501-501-501, pracownik pracuje w Warszawie na ul. Lewartowskiego 12.
+# 16.3 Dodaj do bazy danych pracownika: Alojzy Mikos zatrudniony od 11 sierpnia 2010 r. w dziale zaopatrzenie na stanowisku magazyniera z pensją 3000 zł i dodatkiem 50 zł, telefon do pracownika: 501-501-501, pracownik pracuje w Warszawie na ul. Lewartowskiego 12.
 # INSERT INTO pracownik (imie, nazwisko, data_zatr, dzial, stanowisko, pensja, dodatek, telefon, id_miejsce) VALUES ('Alojzy', 'Mikos', '2010-08-11', 'dział zaopatrzenia', 'magazynier', 3000, 50, '501-501-501', 1)
 
 # --------------------------------------------------
 [!] `samochod` & `wypozyczenie` [!]
 # --------------------------------------------------
 
-17 Złączenia wewnętrzne dwóch tabel
+# 17 Złączenia wewnętrzne dwóch tabel
 # SELECT samochod.id_samochod, samochod.marka, samochod.typ, wypozyczenie.data_wyp, wypozyczenie.data_odd FROM samochod JOIN wypozyczenie ON samochod.id_samochod = wypozyczenie.id_samochod WHERE wypozyczenie.data_odd IS NULL
 
-17.1 Wyszukaj samochody, który nie zostały zwrócone. (Data oddania samochodu ma mieć wartość NULL.) Wyświetl identyfikator, markę i typ samochodu oraz jego datę wypożyczenia i oddania.
+# 17.1 Wyszukaj samochody, który nie zostały zwrócone. (Data oddania samochodu ma mieć wartość NULL.) Wyświetl identyfikator, markę i typ samochodu oraz jego datę wypożyczenia i oddania.
 # SELECT samochod.id_samochod, samochod.marka, samochod.typ, wypozyczenie.data_wyp, wypozyczenie.data_odd FROM samochod JOIN wypozyczenie ON samochod.id_samochod = wypozyczenie.id_samochod WHERE wypozyczenie.data_odd IS NULL
 # SELECT samochod.id_samochod, samochod.marka, samochod.typ FROM samochod JOIN wypozyczenie ON wypozyczenie.id_samochod = samochod.id_samochod WHERE wypozyczenie.data_odd is NULL
 # SELECT samochod.id_samochod, samochod.marka, samochod.typ, wypozyczenie.data_odd FROM samochod JOIN wypozyczenie ON wypozyczenie.id_samochod = samochod.id_samochod WHERE wypozyczenie.data_odd is NULL
@@ -316,11 +315,11 @@ SELECT * FROM `pracownik`
 [!] `klient` & `wypozyczenie` [!]
 # --------------------------------------------------
 
-17.2 Wyszukaj klientów, którzy nie zwrócili jeszcze samochodu. (Data oddania samochodu ma mieć wartość NULL.) Wyświetl imię i nazwisko klienta oraz identyfikator samochodu i datę wypożyczenia nie zwróconego jeszcze samochodu. Wynik posortuj rosnąco względem nazwiska i imienia klienta.
+# 17.2 Wyszukaj klientów, którzy nie zwrócili jeszcze samochodu. (Data oddania samochodu ma mieć wartość NULL.) Wyświetl imię i nazwisko klienta oraz identyfikator samochodu i datę wypożyczenia nie zwróconego jeszcze samochodu. Wynik posortuj rosnąco względem nazwiska i imienia klienta.
 # SELECT klient.imie, klient.nazwisko, wypozyczenie.id_samochod, wypozyczenie.data_wyp FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient WHERE wypozyczenie.data_odd IS NULL ORDER BY nazwisko ASC, imie ASC
 # SELECT klient.imie, klient.nazwisko, wypozyczenie.id_samochod, wypozyczenie.data_wyp, wypozyczenie.data_odd FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient WHERE wypozyczenie.data_odd IS NULL ORDER BY klient.nazwisko ASC, klient.imie ASC
 
-17.3 Wśród klientów wypożyczalni wyszukaj daty i kwoty wpłaconych przez nich kaucji. Wyświetl imię i nazwisko klienta oraz datę wpłacenia kaucji (data wypożyczenia samochodu jest równocześnie datą wpłacenia kaucji) i jej wysokość (pomiń kaucje mające wartość NULL).
+# 17.3 Wśród klientów wypożyczalni wyszukaj daty i kwoty wpłaconych przez nich kaucji. Wyświetl imię i nazwisko klienta oraz datę wpłacenia kaucji (data wypożyczenia samochodu jest równocześnie datą wpłacenia kaucji) i jej wysokość (pomiń kaucje mające wartość NULL).
 # SELECT klient.imie, klient.nazwisko, wypozyczenie.data_wyp, wypozyczenie.kaucja FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient WHERE wypozyczenie.kaucja IS NOT NULL
 # SELECT klient.imie, klient.nazwisko, wypozyczenie.data_wyp, wypozyczenie.kaucja FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient WHERE wypozyczenie.kaucja IS NOT NULL
 
@@ -328,63 +327,63 @@ SELECT * FROM `pracownik`
 [!] `klient` & `wypozyczenie` & 'samochod' [!]
 # --------------------------------------------------
 
-18 Złączenia wewnętrzne większej liczby tabel
+# 18 Złączenia wewnętrzne większej liczby tabel
 # SELECT klient.imie, klient.nazwisko, wypozyczenie.data_wyp, samochod.marka, samochod.typ FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient JOIN samochod on samochod.id_samochod = wypozyczenie.id_samochod
 
-18.1 Dla każdego klienta, który choć raz wypożyczył samochód, wyszukaj jakie i kiedy wypożyczył samochody. Wyświetl imię i nazwisko klienta oraz datę wypożyczenia, markę i typ wypożyczonego samochodu. Wynik posortuj rosnąco po nazwisku i imieniu klienta oraz marce i typie samochodu.
+# 18.1 Dla każdego klienta, który choć raz wypożyczył samochód, wyszukaj jakie i kiedy wypożyczył samochody. Wyświetl imię i nazwisko klienta oraz datę wypożyczenia, markę i typ wypożyczonego samochodu. Wynik posortuj rosnąco po nazwisku i imieniu klienta oraz marce i typie samochodu.
 # SELECT klient.imie, klient.nazwisko, wypozyczenie.data_wyp, samochod.marka, samochod.typ FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient JOIN samochod on samochod.id_samochod = wypozyczenie.id_samochod ORDER BY klient.nazwisko ASC, klient.imie ASC, samochod.marka ASC, samochod.typ ASC
 
 # --------------------------------------------------
 [!] `miejsce` & `wypozyczenie` & 'wypozyczenie' [!]
 # ----------------------------------------------
 
-18.2 Dla każdej filii wypożyczalni samochodów (tabela miejsce) wyszukaj jakie samochody były wypożyczane. Wyświetl adres filii (ulica i numer) oraz markę i typ wypożyczonego samochodu. Wyniki posortuj rosnąco względem adresu filii, marki i typu samochodu.
+# 18.2 Dla każdej filii wypożyczalni samochodów (tabela miejsce) wyszukaj jakie samochody były wypożyczane. Wyświetl adres filii (ulica i numer) oraz markę i typ wypożyczonego samochodu. Wyniki posortuj rosnąco względem adresu filii, marki i typu samochodu.
 # SELECT miejsce.ulica, miejsce.numer, samochod.marka, samochod.typ FROM miejsce JOIN wypozyczenie ON miejsce.id_miejsce = wypozyczenie.id_miejsca_wyp JOIN samochod on samochod.id_samochod = wypozyczenie.id_samochod
 
 # --------------------------------------------------
 [!] `wypozyczenie` & `wypozyczenie` & 'klient' [!]
 # ----------------------------------------------
 
-18.3 Dla każdego wypożyczonego samochodu wyszukaj informację jacy klienci go wypożyczali. Wyświetl identyfikator, markę i typ samochodu oraz imię i nazwisko klienta. Wyniki posortuj rosnąco po identyfikatorze samochodu oraz nazwisku i imieniu klienta.
+# 18.3 Dla każdego wypożyczonego samochodu wyszukaj informację jacy klienci go wypożyczali. Wyświetl identyfikator, markę i typ samochodu oraz imię i nazwisko klienta. Wyniki posortuj rosnąco po identyfikatorze samochodu oraz nazwisku i imieniu klienta.
 # SELECT samochod.id_samochod, samochod.marka, samochod.typ, klient.imie, klient.nazwisko FROM samochod JOIN wypozyczenie on samochod.id_samochod = wypozyczenie.id_wypozyczenie JOIN klient ON klient.id_klient = wypozyczenie.id_klient ORDER BY samochod.id_samochod ASC, klient.nazwisko ASC
 
 # --------------------------------------------------
 SELECT * FROM `pracownik`
 # --------------------------------------------------
 
-19 Funkcje agregujące bez grupowania
+# 19 Funkcje agregujące bez grupowania
 # podstawowe, przydatne funkcji: avg, min, max
-SELECT MAX(pracownik.pensja) FROM pracownik
-
-19.1 Znaleźć największą pensję pracownika wypożyczalni samochodów.
 # SELECT MAX(pracownik.pensja) FROM pracownik
 
-19.2 Znaleźć średnią pensję pracownika wypożyczalni samochodów.
+# 19.1 Znaleźć największą pensję pracownika wypożyczalni samochodów.
+# SELECT MAX(pracownik.pensja) FROM pracownik
+
+# 19.2 Znaleźć średnią pensję pracownika wypożyczalni samochodów.
 # SELECT AVG(pracownik.pensja) FROM pracownik
 
 # --------------------------------------------------
 SELECT * FROM `samochod`
 # --------------------------------------------------
 
-19.3 Znaleźć najwcześniejszą datę wyprodukowania samochodu.
-SELECT MIN(samochod.data_prod) FROM samochod
+# 19.3 Znaleźć najwcześniejszą datę wyprodukowania samochodu.
+# SELECT MIN(samochod.data_prod) FROM samochod
 
 # --------------------------------------------------
 [!] 'klient' & `wypozyczenie` [!]
 # --------------------------------------------------
 
-20 Funkcje agregujące z grupowaniem (GROUP BY, złączenia zewnętrzne)
+# 20 Funkcje agregujące z grupowaniem (GROUP BY, złączenia zewnętrzne)
 # SELECT klient.imie, klient.nazwisko, wypozyczenie.id_wypozyczenie FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient
 # SELECT klient.imie, klient.nazwisko, COUNT(wypozyczenie.id_wypozyczenie) FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient GROUP BY klient.id_klient
 
-20.1 Dla każdego klienta wypisz imię, nazwisko i łączną ilość wypożyczeń samochodów (nie zapomnij o zerowej liczbie wypożyczeń). Wynik posortuj malejąco względem ilości wypożyczeń.
+# 20.1 Dla każdego klienta wypisz imię, nazwisko i łączną ilość wypożyczeń samochodów (nie zapomnij o zerowej liczbie wypożyczeń). Wynik posortuj malejąco względem ilości wypożyczeń.
 # SELECT klient.imie, klient.nazwisko, COUNT(wypozyczenie.id_wypozyczenie) FROM klient JOIN wypozyczenie ON klient.id_klient = wypozyczenie.id_klient GROUP BY klient.id_klient
 
 # --------------------------------------------------
 [!] 'samochod' & `wypozyczenie` [!]
 # --------------------------------------------------
 
-20.2 Dla każdego samochodu (identyfikator, marka, typ) oblicz ilość wypożyczeń. Wynik posortuj rosnąco względem ilości wypożyczeń. (Nie zapomnij o samochodach, które ani razu nie zostały wypożyczone.)
+# 20.2 Dla każdego samochodu (identyfikator, marka, typ) oblicz ilość wypożyczeń. Wynik posortuj rosnąco względem ilości wypożyczeń. (Nie zapomnij o samochodach, które ani razu nie zostały wypożyczone.)
 # SELECT samochod.id_samochod, samochod.marka, samochod.typ, count(wypozyczenie.id_wypozyczenie) FROM samochod JOIN wypozyczenie ON samochod.id_samochod = wypozyczenie.id_samochod GROUP BY samochod.id_samochod
 # SELECT samochod.id_samochod, samochod.marka, samochod.typ, count(wypozyczenie.id_wypozyczenie) as liczba FROM samochod JOIN wypozyczenie ON samochod.id_samochod = wypozyczenie.id_samochod GROUP BY samochod.id_samochod ORDER BY liczba
 # SELECT samochod.id_samochod, samochod.marka, samochod.typ, count(wypozyczenie.id_wypozyczenie) as liczba FROM samochod LEFT JOIN wypozyczenie ON samochod.id_samochod = wypozyczenie.id_samochod GROUP BY samochod.id_samochod ORDER BY liczba
@@ -393,11 +392,13 @@ SELECT MIN(samochod.data_prod) FROM samochod
 [!] 'pracownik' & `wypozyczenie` [!]
 # --------------------------------------------------
 
-20.3 Dla każdego pracownika oblicz ile wypożyczył samochodów klientom. Wyświetl imię i nazwisko pracownika oraz ilość wypożyczeń. Wynik posortuj malejąco po ilości wypożyczeń. (Nie zapomnij o pracownikach, którzy nie wypożyczyli żadnego samochodu.)
+# 20.3 Dla każdego pracownika oblicz ile wypożyczył samochodów klientom. Wyświetl imię i nazwisko pracownika oraz ilość wypożyczeń. Wynik posortuj malejąco po ilości wypożyczeń. (Nie zapomnij o pracownikach, którzy nie wypożyczyli żadnego samochodu.)
 # SELECT pracownik.imie, pracownik.nazwisko, COUNT(wypozyczenie.id_wypozyczenie) FROM pracownik JOIN wypozyczenie ON pracownik.id_pracownik = wypozyczenie.id_pracow_wyp GROUP BY pracownik.id_pracownik
 # SELECT pracownik.imie, pracownik.nazwisko, COUNT(wypozyczenie.id_wypozyczenie) AS ilosc FROM pracownik JOIN wypozyczenie ON pracownik.id_pracownik = wypozyczenie.id_pracow_wyp GROUP BY pracownik.id_pracownik ORDER BY ilosc DESC
 # SELECT pracownik.imie, pracownik.nazwisko, COUNT(wypozyczenie.id_wypozyczenie) AS ilosc FROM pracownik LEFT JOIN wypozyczenie ON pracownik.id_pracownik = wypozyczenie.id_pracow_wyp GROUP BY pracownik.id_pracownik ORDER BY ilosc DESC
 
+# --------------------------------------------------
+######################################################################
 # --------------------------------------------------
 
 21 Warunki na funkcje agregujące (HAVING)
