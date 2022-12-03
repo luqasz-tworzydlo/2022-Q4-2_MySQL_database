@@ -1,6 +1,6 @@
-Utworzyć bazę biblioteka [utf8_polish_ci]:
+﻿Utworzyć bazę biblioteka [utf8_polish_ci]:
 Tabele:
-- ksiazka (id, autor, tytul, rok_wydania, wydawnictwo, numer ISBN, czy_wypozyczona)
+- ksiazka (id, autor, tytul, rok_wydania, wydawnictwo, numer_ISBN, czy_wypozyczona)
 => INSERT INTO ksiazka (autor, tytul, rok_wydania, wydawnictwo, numer_ISBN, czy_wypozyczona) VALUES ('Anonim', 'Jak być i jak nie być', 2022, 'Anonimoo', '986-32-456-4354-2', 0)
 => INSERT INTO ksiazka (autor, tytul, rok_wydania, wydawnictwo, numer_ISBN, czy_wypozyczona) VALUES ('Anonim1234', 'Przyszłość i przeszłość', 1752, 'Anonimoo', '986-32-456-4354-2', 1)
 => INSERT INTO ksiazka (autor, tytul, rok_wydania, wydawnictwo, numer_ISBN, czy_wypozyczona) VALUES ('AL', 'Jak to było', 1752, 'ABCDEFG', '986-32-456-4354-2', 0)
@@ -8,7 +8,7 @@ Tabele:
 => INSERT INTO klient (imie, nazwisko, liczba_pozyczonych_ksiazek, termin_oddania_ksiazek) VALUES ('Nowa', 'Nowakowska', 2, '2022-11-14')
 => INSERT INTO klient (imie, nazwisko) VALUES ('Na', 'Nudne')
 => INSERT INTO klient (nazwisko) VALUES ('Nieznany')
-- wypożyczenie (id, id_klienta, id_ksiazki, id_pracownik_biblioteki, czy_oddana)
+- wypozyczenie (id, id_klienta, id_ksiazki, id_pracownik_biblioteki, czy_oddana)
 => INSERT INTO wypozyczenie (id_klienta, id_ksiazki, id_pracownik_biblioteki, czy_oddana) VALUES (1, 2, 1, 0)
 - bibliotekarz (id, nazwisko, data_zatrudnienia, liczba_ksiazek_wypozyczonych)
 => INSERT INTO bibliotekarz (nazwisko, data_zatrudnienia, liczba_ksiazek_wypozyczonych) VALUES ('Czaso', '2020-01-23', 15)
